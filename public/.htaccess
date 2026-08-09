@@ -1,0 +1,5 @@
+# No front controller — pages are addressed directly (questions.php,
+# questions-edit.php?id=5, ...). No rewrite rules needed.
+
+# No directory listings.
+Options -Indexes
