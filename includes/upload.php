@@ -65,7 +65,7 @@ function storeValidatedImage($file, &$error = null)
     return $name;
 }
 
-/** Delete a stored image file by name (best effort; ignores absence). */
+/* Delete a stored image file by name */
 function deleteQuestionImage($name)
 {
     $path = UPLOAD_PATH . '/' . basename($name);

@@ -318,7 +318,7 @@ table.data thead th {
 table.data tbody tr:hover td { background: var(--accent-tint); }
 table.data td.actions { white-space: nowrap; text-align: right; }
 
-/* ---- Empty state --------------------------------------------------- */
+/*  Empty state  */
 .empty {
     text-align: center; padding: var(--space-8) var(--space-5);
     border: 1px solid var(--rule); border-radius: var(--radius);
@@ -327,7 +327,7 @@ table.data td.actions { white-space: nowrap; text-align: right; }
 .empty h3 { color: var(--ink); margin-bottom: var(--space-2); }
 .empty p { margin-inline: auto; max-width: 36ch; margin-bottom: var(--space-4); }
 
-/* ---- Home: editorial hero + index --------------------------------- */
+/*  Home: editorial hero + index  */
 .hero { padding-block: var(--space-7) var(--space-6);
     border-bottom: 1px solid var(--ink); }
 .hero h1 { font-size: clamp(2.4rem, 1.6rem + 3.2vw, 3.5rem);
@@ -349,7 +349,7 @@ table.data td.actions { white-space: nowrap; text-align: right; }
     font-size: var(--text-sm); text-decoration: none;
     border-bottom: 1px solid var(--accent); }
 
-/* ---- 404 ----------------------------------------------------------- */
+/* 404  */
 .notfound { text-align: center; padding-block: var(--space-8); }
 .notfound .meta-label { display: block; margin-bottom: var(--space-3); color: var(--accent); }
 .notfound p { color: var(--ink-soft); margin: var(--space-3) auto var(--space-6);
@@ -394,7 +394,7 @@ table.data td.actions { white-space: nowrap; text-align: right; }
 .nav-user { font-family: var(--font-sans); font-weight: 600;
     font-size: var(--text-sm); color: var(--ink-soft); }
 
-/* ---- Search & filter bar (Phase 9)  */
+/* ---- Search bar  */
 .searchbar { display: flex; flex-wrap: wrap; align-items: flex-end;
     gap: var(--space-4); margin-bottom: var(--space-4); }
 .searchbar .field { flex: 1 1 12rem; margin-bottom: 0; }
@@ -407,7 +407,7 @@ table.data td.actions { white-space: nowrap; text-align: right; }
     color: var(--accent-ink); background: var(--accent-tint);
     padding: 0.2rem 0.6rem; border-radius: 999px; }
 
-/* ---- Question gallery thumbnails (Phase 11) */
+/* ---- Question gallery thumbnails */
 .qgallery { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .qthumb-extra { width: 5rem; height: 4rem; }
 .qgallery-manage { gap: var(--space-4); margin-bottom: var(--space-5); }
@@ -435,17 +435,7 @@ table.data td.actions { white-space: nowrap; text-align: right; }
 .bar-value { font-family: var(--font-mono); font-size: var(--text-xs);
     color: var(--ink-soft); text-align: right; }
 
-/* Vertical variant for the 7-day activity chart. */
-.bar-chart-columns { flex-direction: row; align-items: flex-end;
-    justify-content: space-between; height: 8rem; gap: var(--space-2); }
-.bar-chart-columns li { display: flex; flex-direction: column;
-    align-items: center; gap: var(--space-1); grid-template-columns: none;
-    height: 100%; justify-content: flex-end; }
-.col-track { width: 1.5rem; height: 5rem; background: var(--rule);
-    border-radius: var(--radius-sm); display: flex; align-items: flex-end;
-    overflow: hidden; }
-.col-fill { display: block; width: 100%; background: var(--accent);
-    border-radius: var(--radius-sm); }
+
 
 /*Responsive */
 @media (max-width: 40rem) {
@@ -465,9 +455,7 @@ table.data td.actions { white-space: nowrap; text-align: right; }
     .qthumb { width: 100%; height: 11rem; order: -1; }
 }
 
-/* =====================================================================
-   Motion preferences
-   ===================================================================== */
+/*Motion preferences*/
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.001ms !important;
