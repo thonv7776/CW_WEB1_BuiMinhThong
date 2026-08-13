@@ -97,12 +97,4 @@ Password: admin123
 
 Student accounts can be created via the public **Register** page (email OTP required), or you can log in as one of the demo users already seeded in `cw_web1.sql`.
 
-## Known limitations / future work
 
-- The contact form currently saves messages to the database only; it does not yet send a live email to the admin inbox (PHPMailer is already integrated for OTP and could be reused here).
-- No "forgotten password" flow yet — an admin currently has to reset a user's password manually.
-- No pagination — the questions list loads every row at once.
-
-## Referencing / AI use
-
-All third-party code (PHPMailer) is managed via Composer and referenced in `composer.json`. Any AI assistance used while building this project is declared on the AI Use Declaration page of the accompanying report.
