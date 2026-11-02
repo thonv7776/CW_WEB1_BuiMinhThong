@@ -1,5 +1,5 @@
 <?php
-/** OTP entry form. In scope: $email, $error, $notice, $devOtp (string|null). */
+/** OTP entry form. In scope: $email, $error, $notice. */
 $h = function ($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); };
 ?>
 <div class="page-head">
@@ -9,13 +9,6 @@ $h = function ($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); 
             The code expires <?= (int) OTP_TTL_MINUTES ?> minutes after it's sent.</p>
     </div>
 </div>
-
-<?php if ($devOtp !== null): ?>
-    <div class="alert alert-info">
-        Email sending isn’t configured yet (see <code>.env.example</code>), so here is your
-        code for testing: <strong><?= $h($devOtp) ?></strong>
-    </div>
-<?php endif; ?>
 
 <?php if ($notice !== null): ?>
     <div class="alert alert-success" role="status"><?= $h($notice) ?></div>

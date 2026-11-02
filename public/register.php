@@ -1,5 +1,5 @@
 <?php
-/** GET /register.php — form. POST — validate, create unverified account, email OTP. */
+
 require dirname(__DIR__) . '/config/config.php';
 require INCLUDES_PATH . '/db-connect.php';
 require INCLUDES_PATH . '/db-functions.php';
@@ -44,21 +44,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['confirm_password'] = 'Passwords do not match.';
     }
 
+
+
+
+    //create OTP and send email//
     if (!$errors) {
         try {
             $otp = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
             $expiresAt = date('Y-m-d H:i:s', time() + OTP_TTL_MINUTES * 60);
 
-            insertPendingUser($pdo, $username, $email, password_hash($password, PASSWORD_DEFAULT), $otp, $expiresAt);
+            $newId = insertPendingUser($pdo, $username, $email, password_hash($password, PASSWORD_DEFAULT), $otp, $expiresAt);
 
             if (!sendOtpEmail($email, $username, $otp)) {
-                // SMTP not configured yet — stash the code as a one-time flash so
-                // the flow is still testable without a real mailbox.
-                $_SESSION['dev_otp'] = $otp;
+                // No usable account without a code: remove it so the person can try again.
+                deleteUser($pdo, $newId);
+                $errors['general'] = 'Sorry — the verification email could not be sent, so the account was not created. Please try again later.';
+            } else {
+                header('Location: verify.php?email=' . urlencode($email));
+                exit;
             }
-
-            header('Location: verify.php?email=' . urlencode($email));
-            exit;
         } catch (PDOException $e) {
             $errors['general'] = 'Sorry — your account could not be created. Please try again.';
         }

@@ -10,7 +10,7 @@ $mode = 'add';
 $question = null;
 $errors = [];
 $old = [];
-$sessionUsername = $_SESSION['username'];
+$sessionUsername = $_SESSION['username']; // Session based author track
 
 $modules = [];
 try {

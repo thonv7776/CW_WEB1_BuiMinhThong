@@ -8,6 +8,7 @@ require INCLUDES_PATH . '/db-functions.php';
 $error = null;
 $entries = [];
 try {
+    //activity log
     $entries = allActivityLog($pdo, 100);
 } catch (PDOException $e) {
     $error = 'Sorry — we couldn’t load the activity log just now. Please try again shortly.';

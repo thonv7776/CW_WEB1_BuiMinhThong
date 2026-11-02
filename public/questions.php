@@ -1,5 +1,4 @@
 <?php
-/** GET /questions.php — list every question. */
 require dirname(__DIR__) . '/config/config.php';
 require INCLUDES_PATH . '/db-connect.php';
 require INCLUDES_PATH . '/db-functions.php';

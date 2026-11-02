@@ -1,9 +1,10 @@
 <?php
-/** GET /contact.php — form. POST — validate, insert, redirect with a flash. */
+/** GET /contact.php — form. POST — validate, save, email the admin, redirect with a flash. */
 require dirname(__DIR__) . '/config/config.php';
 require INCLUDES_PATH . '/db-connect.php';
 require INCLUDES_PATH . '/db-functions.php';
 require INCLUDES_PATH . '/validate.php';
+require INCLUDES_PATH . '/mailer.php';
 
 $errors = [];
 $old = [];
@@ -35,6 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$errors) {
         try {
             insertMessage($pdo, $name, $email, $subject, $body);
+            // Also email the administrator. The message is already stored for the
+            // admin inbox, so a mail failure must not lose it or show an error.
+            sendContactEmail($name, $email, $subject, $body);
             header('Location: contact.php?sent=1');
             exit;
         } catch (PDOException $e) {

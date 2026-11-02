@@ -22,10 +22,12 @@ define('TEMPLATES_PATH', ROOT_PATH . '/templates');
 define('PUBLIC_PATH', ROOT_PATH . '/public');
 define('UPLOAD_PATH', PUBLIC_PATH . '/images');
 
-// --- Public URLs -------------------------------------------------------
-// Web root is public/. Update BASE_URL if the project is moved.
-define('BASE_URL', 'http://localhost/COMP1841/FIX/cw_web1/public/');
-define('UPLOAD_URL', BASE_URL . 'images/');
+// --- Public URL --------------------------------------------------------
+// Worked out from the current request, so the site runs from any folder
+// (XAMPP/WAMP htdocs, a sub-folder, or the I-Drive) without editing this file.
+$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$folder = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
+define('BASE_URL', $scheme . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . $folder . '/');
 
 // --- Self-service accounts + email OTP ----------------------------------
 define('OTP_TTL_MINUTES', 10);

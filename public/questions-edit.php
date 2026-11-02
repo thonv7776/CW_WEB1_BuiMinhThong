@@ -1,14 +1,12 @@
 <?php
-/**
- * GET /questions-edit.php?id= — form. POST — validate, upload, update, redirect.
- * Reachable by the question's own author, or an admin (who may also reassign
- * the author/module via dropdowns — see questions-form.php's $isAdminEditing).
- */
+
 require dirname(__DIR__) . '/config/config.php';
 require INCLUDES_PATH . '/db-connect.php';
 require INCLUDES_PATH . '/db-functions.php';
 require INCLUDES_PATH . '/upload.php';
 
+
+//check user or admin exist ?
 if (empty($_SESSION['user_id']) && empty($_SESSION['admin_id'])) {
     header('Location: login.php');
     exit;
@@ -80,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['user_id'] = 'Please choose an author.';
     }
 
-    // Default: keep the existing cover image. A valid new upload replaces it.
+    
     $imageName = $question['image'];
     $newImage = saveQuestionImage($_FILES['image'] ?? null, $imgErr);
     if ($imgErr !== null) {

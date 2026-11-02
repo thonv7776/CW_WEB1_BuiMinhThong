@@ -1,9 +1,4 @@
 <?php
-/**
- * db-functions.php — all data access. One function per operation, $pdo
- * always first, every SQL statement via named :placeholders through query().
- * No SQL anywhere else in the codebase (pages or templates).
- */
 
 function query($pdo, $sql, $parameters = [])
 {
@@ -12,7 +7,7 @@ function query($pdo, $sql, $parameters = [])
     return $stmt;
 }
 
-/* --- questions ---------------------------------------------------------- */
+/*  questions  */
 
 /** Every question joined to its author and module, newest first. */
 function allQuestions($pdo)
@@ -80,7 +75,7 @@ function deleteQuestion($pdo, $id)
     query($pdo, 'DELETE FROM questions WHERE question_id = :id', [':id' => (int) $id]);
 }
 
-/* --- users ---------------------------------------------------------------- */
+/*  users  */
 
 /** Every author, alphabetically — for dropdowns. */
 function allUsers($pdo)
@@ -134,7 +129,7 @@ function deleteUser($pdo, $id)
     query($pdo, 'DELETE FROM users WHERE user_id = :id', [':id' => (int) $id]);
 }
 
-/* --- self-service accounts (register / OTP verify / login) ---------------- */
+/*  self-service accounts (register / OTP verify / login)  */
 
 function findUserByEmail($pdo, $email)
 {
@@ -193,7 +188,7 @@ function markUserVerified($pdo, $userId)
     );
 }
 
-/* --- modules -------------------------------------------------------------- */
+/*  modules  */
 
 /** Every module, alphabetically, with how many questions reference it. */
 function allModulesWithCounts($pdo)
@@ -242,7 +237,7 @@ function deleteModule($pdo, $id)
     query($pdo, 'DELETE FROM modules WHERE module_id = :id', [':id' => (int) $id]);
 }
 
-/* --- messages --------------------------------------------------------------- */
+/*  messages  */
 
 function allMessages($pdo)
 {
@@ -264,7 +259,7 @@ function deleteMessage($pdo, $id)
     query($pdo, 'DELETE FROM messages WHERE message_id = :id', [':id' => (int) $id]);
 }
 
-/* --- admins ------------------------------------------------------------------- */
+/*  admins  */
 
 /** One admin row by username, or false if not found. Use with password_verify(). */
 function findAdminByUsername($pdo, $username)
@@ -276,7 +271,7 @@ function findAdminByUsername($pdo, $username)
     )->fetch();
 }
 
-/* --- admin_activity_log --------------------------------------------------- */
+/*  admin_activity_log  */
 
 function logAdminActivity($pdo, $adminId, $action, $entity, $targetId = null)
 {

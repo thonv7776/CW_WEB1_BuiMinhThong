@@ -22,14 +22,10 @@ function saveQuestionImage($file, &$error = null)
         return null; // no file chosen — fine, the image is optional
     }
 
-    return storeValidatedImage($file, $error);
-}
-
-/** Shared validate-then-store logic behind saveQuestionImage(). */
-function storeValidatedImage($file, &$error = null)
-{
-    $error = null;
-
+    if ($file['error'] === UPLOAD_ERR_INI_SIZE || $file['error'] === UPLOAD_ERR_FORM_SIZE) {
+        $error = 'The image must be 2 MB or smaller.';
+        return null;
+    }
     if ($file['error'] !== UPLOAD_ERR_OK) {
         $error = 'The image could not be uploaded. Please try again.';
         return null;

@@ -10,10 +10,6 @@ $email = trim((string) ($_GET['email'] ?? ($_POST['email'] ?? '')));
 $error = null;
 $notice = null;
 
-// One-time dev flash set by register.php/resend when SMTP isn't configured.
-$devOtp = $_SESSION['dev_otp'] ?? null;
-unset($_SESSION['dev_otp']);
-
 if ($email === '' || !validEmail($email)) {
     header('Location: register.php');
     exit;
@@ -42,9 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (sendOtpEmail($email, $user['username'], $otp)) {
             $notice = 'A new code has been emailed to you.';
         } else {
-            $devOtp = $otp;
-            $notice = 'Could not send the email — here is your new code for testing.';
+            $error = 'The verification email could not be sent. Please try again later.';
         }
+
+
+
+
+    //verify OTP//    
     } else {
         $code = trim($_POST['otp'] ?? '');
         $expired = empty($user['otp_expires_at']) || strtotime($user['otp_expires_at']) < time();
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_regenerate_id(true);
             $_SESSION['user_id'] = (int) $user['user_id'];
             $_SESSION['username'] = $user['username'];
-            header('Location: questions.php?verified=1');
+            header('Location: questions.php');
             exit;
         }
     }

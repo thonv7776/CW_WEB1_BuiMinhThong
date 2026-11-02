@@ -1,11 +1,5 @@
 <?php
-/**
- * db-connect.php — the database connection.
- *
- * require'd once by every page. Also starts the session here so every page
- * gets $_SESSION for free, whether it needs the admin guard (includes/require-admin.php)
- * or just the nav's Admin/Dashboard link swap.
- */
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

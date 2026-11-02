@@ -1,10 +1,8 @@
 <?php
-/**
- * POST /questions-delete.php — delete a question. Owner or admin only.
- */
 require dirname(__DIR__) . '/config/config.php';
 require INCLUDES_PATH . '/db-connect.php';
 require INCLUDES_PATH . '/db-functions.php';
+require INCLUDES_PATH . '/upload.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: questions.php');
@@ -26,6 +24,9 @@ try {
 
         if ($isAdmin || $isOwner) {
             deleteQuestion($pdo, $id);
+            if (!empty($question['image']) && !in_array($question['image'], ['pdo-empty-result.png', 'flexbox-center.png'], true)) {
+                deleteQuestionImage($question['image']);
+            }
             if ($isAdmin) {
                 logAdminActivity($pdo, $_SESSION['admin_id'], 'delete', 'question', $id);
             }

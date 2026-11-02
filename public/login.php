@@ -1,5 +1,5 @@
 <?php
-/** GET /login.php — form. POST — authenticate a self-service user account. */
+
 require dirname(__DIR__) . '/config/config.php';
 require INCLUDES_PATH . '/db-connect.php';
 require INCLUDES_PATH . '/db-functions.php';
@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
+        #session based author tracking
         session_regenerate_id(true);
         $_SESSION['user_id'] = (int) $user['user_id'];
         $_SESSION['username'] = $user['username'];

@@ -46,7 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } catch (PDOException $e) {
             if (isConstraintViolation($e)) {
-                $errors['email'] = 'That email is already registered.';
+                if (stripos($e->getMessage(), 'username') !== false) {
+                    $errors['username'] = 'That username is already taken.';
+                } else {
+                    $errors['email'] = 'That email is already registered.';
+                }
             } else {
                 $errors['general'] = 'Sorry — the user could not be saved. Please try again.';
             }

@@ -9,7 +9,6 @@ $actionLabels = [
     'create'  => 'created',
     'update'  => 'updated',
     'delete'  => 'deleted',
-    'restore' => 'restored',
 ];
 ?>
 <div class="page-head">

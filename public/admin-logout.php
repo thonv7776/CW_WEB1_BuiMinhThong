@@ -8,8 +8,7 @@ if (!empty($_SESSION['admin_id'])) {
     logAdminActivity($pdo, $_SESSION['admin_id'], 'logout', 'admin', $_SESSION['admin_id']);
 }
 
-$_SESSION = [];
-session_destroy();
+unset($_SESSION['admin_id'], $_SESSION['admin_name']);
 
 header('Location: index.php');
 exit;
