@@ -1,0 +1,8 @@
+{
+    "name": "comp1841/cw-web1",
+    "description": "Student Q&A CRUD coursework — PHPMailer, used for OTP verification emails and contact-form emails.",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}
